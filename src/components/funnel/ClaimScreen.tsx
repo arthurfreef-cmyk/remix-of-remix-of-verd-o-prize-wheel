@@ -29,7 +29,7 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
   const [cepError, setCepError] = useState("");
 
   useEffect(() => {
-    const digits = form.cep.replace(/\\D/g, "");
+    const digits = form.cep.replace(/\D/g, "");
     if (digits.length !== 8) {
       setCepMessage("");
       setCepError("");
@@ -74,7 +74,7 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
   };
 
   const handleCepChange = (value: string) => {
-    const digits = value.replace(/\\D/g, "").slice(0, 8);
+    const digits = value.replace(/\D/g, "").slice(0, 8);
     update("cep", digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits);
   };
 

@@ -163,7 +163,7 @@ function MetaPixelTracker() {
       fbq("init", "1120115957504526");
     }
 
-    pixelWindow.fbq("track", "PageView");
+    pixelWindow.fbq?.("track", "PageView");
   }, [pageKey]);
 
   return null;

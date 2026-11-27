@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -113,10 +114,59 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <noscript><img height="1" width="1" style={{ display: "none" }} src="https://www.facebook.com/tr?id=1120115957504526&ev=PageView&noscript=1" alt="" /></noscript>
         <Scripts />
       </body>
     </html>
   );
+}
+
+function MetaPixelTracker() {
+  const pageKey = useRouterState({
+    select: (state) => state.location.pathname + state.location.search,
+  });
+
+  useEffect(() => {
+    const pixelWindow = window as typeof window & {
+      fbq?: ((...args: (string | number)[]) => void) & {
+        callMethod?: (...args: (string | number)[]) => void;
+        queue?: unknown[];
+        loaded?: boolean;
+        version?: string;
+      };
+      _fbq?: unknown;
+    };
+
+    if (!pixelWindow.fbq) {
+      const fbq = ((...args: (string | number)[]) => {
+        if (fbq.callMethod) {
+          fbq.callMethod(...args);
+        } else {
+          fbq.queue?.push(args);
+        }
+      }) as NonNullable<typeof pixelWindow.fbq>;
+      fbq.queue = [];
+      fbq.loaded = true;
+      fbq.version = "2.0";
+      pixelWindow.fbq = fbq;
+      pixelWindow._fbq = fbq;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://connect.facebook.net/en_US/fbevents.js";
+      const firstScript = document.getElementsByTagName("script")[0];
+      if (firstScript?.parentNode) {
+        firstScript.parentNode.insertBefore(script, firstScript);
+      } else {
+        document.head.appendChild(script);
+      }
+      fbq("init", "1120115957504526");
+    }
+
+    pixelWindow.fbq("track", "PageView");
+  }, [pageKey]);
+
+  return null;
 }
 
 function RootComponent() {
@@ -124,6 +174,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <MetaPixelTracker />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

@@ -15,19 +15,28 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
       const AudioContextClass = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!AudioContextClass) return;
       const audioContext = new AudioContextClass();
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(660, audioContext.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(880, audioContext.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.12, audioContext.currentTime + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.16);
-      oscillator.connect(gain);
-      gain.connect(audioContext.destination);
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + 0.17);
-      oscillator.onended = () => void audioContext.close();
+      const masterGain = audioContext.createGain();
+      masterGain.gain.setValueAtTime(0.55, audioContext.currentTime);
+      masterGain.connect(audioContext.destination);
+
+      // Pequeno acorde suave, com ataque e decaimento arredondados — sem beep estridente.
+      [523.25, 659.25].forEach((frequency, index) => {
+        const oscillator = audioContext.createOscillator();
+        const noteGain = audioContext.createGain();
+        const startAt = audioContext.currentTime + index * 0.075;
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(frequency, startAt);
+        noteGain.gain.setValueAtTime(0.0001, startAt);
+        noteGain.gain.exponentialRampToValueAtTime(0.045, startAt + 0.035);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.42);
+        oscillator.connect(noteGain);
+        noteGain.connect(masterGain);
+        oscillator.start(startAt);
+        oscillator.stop(startAt + 0.44);
+        oscillator.onended = () => {
+          if (index === 1) void audioContext.close();
+        };
+      });
     } catch {
       // O som é opcional; a resposta continua normalmente se o navegador bloquear áudio.
     }

@@ -65,19 +65,32 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
 
       <div className="mx-auto max-w-md">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-[#f6e4a9] shadow-lg">
-          <span aria-hidden>★</span> Desafio liberado <span aria-hidden>★</span>
+          <span aria-hidden>★</span> Etapa desbloqueada <span aria-hidden>★</span>
         </div>
 
         <h1 className="mt-5 text-3xl font-black uppercase leading-tight tracking-tight sm:text-4xl">
-          Boa, palmeirense!
+          Você chegou à roleta!
         </h1>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-white/85 sm:text-base">
-          Você acertou <strong className="text-[#f6e4a9]">{score} de 5 perguntas</strong>. Agora é hora de girar a Roleta do Verdão!
+          Mandou bem no desafio, palmeirense! Você conquistou acesso à Roleta do Verdão. Agora é hora de girar e descobrir qual prêmio a sua participação vai revelar.
         </p>
 
-        <div className="mx-auto mt-5 flex w-fit items-center gap-2 rounded-xl border border-[#d8bd71]/40 bg-black/20 px-4 py-2 text-sm font-bold text-[#f6e4a9]">
-          <span className="text-lg">🎯</span>
-          {won ? "Resultado confirmado" : `${2 - spins} ${2 - spins === 1 ? "tentativa" : "tentativas"} nesta rodada`}
+        <div className="mx-auto mt-5 grid max-w-sm grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 shadow-lg backdrop-blur-sm">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/65">Sua pontuação</p>
+            <p className="mt-1 text-2xl font-black text-[#f6e4a9]">{score}<span className="text-sm text-white/65">/5</span></p>
+          </div>
+          <div className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 shadow-lg backdrop-blur-sm">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/65">Tentativas</p>
+            <p className="mt-1 text-2xl font-black text-[#f6e4a9]">{Math.max(0, 2 - spins)}<span className="text-sm text-white/65"> disponíveis</span></p>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-5 rounded-2xl border border-[#e4c978]/30 bg-black/15 px-4 py-3 text-left shadow-lg">
+          <p className="text-sm font-extrabold text-[#f6e4a9]">Sua missão agora é simples:</p>
+          <p className="mt-1 text-sm leading-relaxed text-white/85">
+            Toque em <strong className="text-white">GIRAR A ROLETA</strong>, acompanhe o giro até parar e confira o resultado. Se aparecer “Tente novamente”, você poderá fazer outra tentativa.
+          </p>
         </div>
 
         <div className="relative mx-auto mt-7 w-full max-w-[340px]">
@@ -142,7 +155,7 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           {message ? (
             <p className="rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white shadow-lg">{message}</p>
           ) : (
-            <p className="text-sm text-white/75">Escolha o momento e toque no botão para girar.</p>
+            <p className="text-sm font-semibold text-white/80">A roleta está pronta. Boa sorte e avanti, Verdão! 💚</p>
           )}
         </div>
 
@@ -158,8 +171,15 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           {spinning ? "Boa sorte! Girando..." : won ? "Resultado confirmado" : "GIRAR A ROLETA"}
         </Button>
 
-        <p className="mt-5 text-xs leading-relaxed text-white/60">
-          A roleta pode ser girada duas vezes por rodada. Se não sair um prêmio, uma nova rodada de tentativas será disponibilizada.
+        <div className="mt-6 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 text-left">
+          <p className="text-sm font-extrabold text-white">O que pode aparecer?</p>
+          <p className="mt-1 text-xs leading-relaxed text-white/75">
+            Camisas do Palmeiras e outros itens exibidos nos setores da roleta. O resultado será mostrado assim que o giro terminar.
+          </p>
+        </div>
+
+        <p className="mt-5 text-xs leading-relaxed text-white/55">
+          Confira o resultado na tela seguinte e siga as instruções apresentadas para consultar as condições de participação e resgate.
         </p>
       </div>
     </main>

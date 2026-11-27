@@ -26,7 +26,7 @@ export const questions: Question[] = [
   { question: "Qual o nome original do Palmeiras?", options: ["Palestra Itália", "Sport Club Italiano", "Verde Paulista", "Clube Alviverde"], correctIndex: 0 },
 ];
 
-/** Wheel segments in clockwise order, starting at the top. */
+/** Wheel sectors are selected randomly on each spin. */
 export const prizes: Prize[] = [
   { id: 0, label: "Camisa I 26/27", name: "Camisa Palmeiras Puma I 26/27", image: camisaPumaI2627, emoji: "👕", isLoss: false },
   { id: 1, label: "Tente novamente", name: "Tente novamente", emoji: "🔄", isLoss: true },
@@ -39,9 +39,9 @@ export const prizes: Prize[] = [
 export const LOSS_INDEX = 1;
 export const WIN_INDEX = 0;
 
-/** First spin always lands on "Tente novamente"; the second lands on the main prize. */
-export function targetForSpin(spinNumber: number): number {
-  return spinNumber <= 1 ? LOSS_INDEX : WIN_INDEX;
+/** Returns a random sector so the visual result matches the selected outcome. */
+export function targetForSpin(_spinNumber: number): number {
+  return Math.floor(Math.random() * prizes.length);
 }
 
 /** Final wheel rotation (deg) so segment `index` stops under the top pointer. */

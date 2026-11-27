@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
-import { CheckCircle2, Truck } from "lucide-react";
+import { Truck } from "lucide-react";
 import logo from "@/assets/palmeiras-logo.png";
 
 const sizes = ["P", "M", "G", "GG", "G1"];
@@ -33,9 +33,6 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
 
       <section className="mx-auto w-full max-w-md pb-8 pt-7">
         <div className="rounded-2xl border border-emerald-900/10 bg-white p-5 text-center shadow-[0_12px_36px_rgba(4,55,31,0.10)]">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
-            <CheckCircle2 className="h-8 w-8 text-[#087a45]" />
-          </div>
           <h1 className="mt-4 text-2xl font-black leading-tight text-[#075b32]">
             Seu endereço foi cadastrado e seu prêmio foi reservado!
           </h1>

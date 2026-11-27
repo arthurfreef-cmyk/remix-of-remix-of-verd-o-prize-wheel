@@ -33,7 +33,6 @@ export const prizes: Prize[] = [
   { id: 2, label: "Camisa II 26/27", name: "Camisa Palmeiras Puma II 26/27", image: camisaPumaII, emoji: "👕", isLoss: false },
   { id: 3, label: "Camisa Third", name: "Camisa Palmeiras Third 25/26", image: camisaThird, emoji: "👕", isLoss: false },
   { id: 4, label: "Camisa I 25/26", name: "Camisa Palmeiras Puma I 25/26", image: camisaPumaI2526, emoji: "👕", isLoss: false },
-  { id: 5, label: "Bola Oficial", name: "Bola Oficial Palmeiras", emoji: "⚽", isLoss: false },
 ];
 
 export const LOSS_INDEX = 1;

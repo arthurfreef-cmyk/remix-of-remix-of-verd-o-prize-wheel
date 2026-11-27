@@ -99,15 +99,15 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
   );
 
   return (
-    <main className="min-h-[calc(100svh-5rem)] bg-gradient-to-b from-[#f4f8f5] to-white px-4 py-7">
-      <div className="mx-auto max-w-md overflow-hidden rounded-3xl border border-emerald-900/10 bg-white shadow-[0_18px_55px_rgba(4,55,31,0.12)]">
-        <header className="flex flex-col items-center bg-gradient-to-r from-[#06452b] to-[#087a45] px-6 py-5 text-center text-white">
+    <main className="min-h-[calc(100svh-5rem)] bg-gradient-to-b from-[#f4f8f5] to-white px-3 py-4 sm:px-4 sm:py-7">
+      <div className="mx-auto max-w-md overflow-hidden rounded-2xl border sm:rounded-3xl border-emerald-900/10 bg-white shadow-[0_18px_55px_rgba(4,55,31,0.12)]">
+        <header className="flex flex-col items-center bg-gradient-to-r from-[#06452b] to-[#087a45] px-4 py-4 text-center sm:px-6 sm:py-5 text-white">
           <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-100">Desafio do Verdão</p>
-          <h1 className="mt-1 text-2xl font-black uppercase">Resgate seu prêmio</h1>
+          <h1 className="mt-1 text-xl sm:text-2xl font-black uppercase">Resgate seu prêmio</h1>
           <p className="mt-1 text-sm text-white/85">Só falta informar os dados para continuar.</p>
         </header>
 
-        <form onSubmit={submit} className="space-y-5 p-5 sm:p-6">
+        <form onSubmit={submit} className="space-y-4 p-4 sm:space-y-5 sm:p-6">
           <div className="flex items-center gap-3 rounded-2xl border border-emerald-800/10 bg-emerald-50 p-3">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white">
               {prize.image ? <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="h-full w-full object-contain" /> : <span className="text-3xl">{prize.emoji}</span>}
@@ -144,7 +144,7 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
             </div>
 
             {field("rua", "Rua", "Nome da rua")}
-            <div className="grid grid-cols-[1fr_1.2fr] gap-3">
+            <div className="grid grid-cols-[0.8fr_1.2fr] gap-2 sm:gap-3">
               {field("numero", "Número", "Nº")}
               {field("cidade", "Cidade", "Sua cidade")}
             </div>

@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, MapPin, ShieldCheck } from "lucide-react";
 import type { Prize } from "@/data/funnel";
-import logo from "@/assets/palmeiras-logo.png";
 
 type AddressForm = {
   nome: string;
@@ -103,7 +102,6 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
     <main className="min-h-[calc(100svh-5rem)] bg-gradient-to-b from-[#f4f8f5] to-white px-4 py-7">
       <div className="mx-auto max-w-md overflow-hidden rounded-3xl border border-emerald-900/10 bg-white shadow-[0_18px_55px_rgba(4,55,31,0.12)]">
         <header className="flex flex-col items-center bg-gradient-to-r from-[#06452b] to-[#087a45] px-6 py-5 text-center text-white">
-          <img src={logo} alt="Escudo do Palmeiras" className="mb-2 h-16 w-16 object-contain drop-shadow-md" />
           <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-100">Desafio do Verdão</p>
           <h1 className="mt-1 text-2xl font-black uppercase">Resgate seu prêmio</h1>
           <p className="mt-1 text-sm text-white/85">Só falta informar os dados para continuar.</p>

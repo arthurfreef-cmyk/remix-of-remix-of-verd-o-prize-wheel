@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
-import { Truck } from "lucide-react";
 import logo from "@/assets/palmeiras-logo.png";
 
 const sizes = ["P", "M", "G", "GG", "G1"];
@@ -79,16 +78,6 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
                 {item}
               </button>
             ))}
-          </div>
-
-          <div className="mt-5 rounded-xl bg-emerald-50 p-3 text-center">
-            <div className="flex items-center justify-center gap-2 text-sm font-bold text-[#075b32]">
-              <Truck className="h-5 w-5" />
-              Frete via SEDEX
-            </div>
-            <p className="mt-1 text-sm leading-relaxed text-slate-700">
-              Envio via SEDEX com taxa fixa.
-            </p>
           </div>
 
           <Button onClick={handlePayment} size="lg" className="mt-5 h-14 w-full rounded-xl bg-[#087a45] text-base font-black uppercase tracking-wide text-white shadow-lg hover:bg-[#06683a]">

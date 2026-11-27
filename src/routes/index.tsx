@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/funnel/Header";
 import { HomeScreen } from "@/components/funnel/HomeScreen";
 import { QuizScreen } from "@/components/funnel/QuizScreen";
+import { AnalysisScreen } from "@/components/funnel/AnalysisScreen";
 import { WheelScreen } from "@/components/funnel/WheelScreen";
 import { ResultScreen } from "@/components/funnel/ResultScreen";
 import { ClaimScreen } from "@/components/funnel/ClaimScreen";
+import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
 import { questions } from "@/data/funnel";
 
@@ -23,7 +25,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Step = "home" | "quiz" | "wheel" | "result" | "claim" | "done";
+type Step = "home" | "quiz" | "analysis" | "not-qualified" | "wheel" | "result" | "claim" | "done";
 
 function Index() {
   const [step, setStep] = useState<Step>("home");
@@ -38,7 +40,26 @@ function Index() {
     <div className="min-h-screen bg-background">
       <Header />
       {step === "home" && <HomeScreen onStart={() => { setQuizScore(0); setStep("quiz"); }} />}
-      {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("wheel"); }} />}
+      {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("analysis"); }} />}
+      {step === "analysis" && (
+        <AnalysisScreen
+          score={quizScore}
+          total={questions.length}
+          onFinish={(qualified) => setStep(qualified ? "wheel" : "not-qualified")}
+        />
+      )}
+      {step === "not-qualified" && (
+        <main className="mx-auto flex min-h-[calc(100svh-6rem)] max-w-md flex-col items-center justify-center px-6 py-10 text-center">
+          <div className="mb-4 text-6xl">💚</div>
+          <h1 className="text-3xl font-extrabold text-primary">Quase lá!</h1>
+          <p className="mt-4 text-lg text-foreground">
+            Você acertou <strong>{quizScore} de {questions.length}</strong> perguntas. É necessário acertar pelo menos 3 para liberar a roleta.
+          </p>
+          <Button onClick={() => { setQuizScore(0); setStep("quiz"); }} size="lg" className="mt-7 h-14 w-full text-lg font-bold uppercase">
+            Tentar novamente
+          </Button>
+        </main>
+      )}
       {step === "wheel" && <WheelScreen onWin={(p) => { setPrize(p); setStep("result"); }} />}
       {step === "result" && prize && <ResultScreen prize={prize} score={quizScore} total={questions.length} onClaim={() => setStep("claim")} />}
       {step === "claim" && prize && <ClaimScreen prize={prize} onDone={() => setStep("done")} />}

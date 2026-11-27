@@ -18,23 +18,23 @@ export function ResultScreen({ prize, score, total, onClaim }: { prize: Prize; s
   }, []);
 
   return (
-    <div className="mx-auto max-w-md animate-pop-in space-y-5 px-6 py-8 text-center">
-      <h1 className="text-4xl font-bold uppercase text-primary">Você ganhou!</h1>
-      <div className="rounded-2xl border border-primary/15 bg-primary/5 px-5 py-4">
+    <div className="mx-auto max-w-md animate-pop-in space-y-4 px-4 py-5 sm:space-y-5 sm:px-6 sm:py-8 text-center">
+      <h1 className="text-3xl font-bold sm:text-4xl uppercase text-primary">Você ganhou!</h1>
+      <div className="rounded-2xl border border-primary/15 bg-primary/5 px-4 py-4 sm:px-5">
         <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Sua pontuação no quiz</p>
         <p className="mt-1 text-4xl font-extrabold text-primary">{score} <span className="text-xl text-muted-foreground">/ {total}</span></p>
         <p className="mt-1 text-sm font-medium text-foreground">{score === total ? "Perfeito! Você é um verdadeiro palestrino!" : score >= 3 ? "Mandou bem! Você conhece o Verdão!" : "Obrigado por participar do desafio!"}</p>
       </div>
       <div className="mx-auto max-w-xs rounded-2xl bg-secondary p-4">
         {prize.image ? (
-          <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="h-64 w-full rounded-xl object-contain" />
+          <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="h-56 w-full sm:h-64 rounded-xl object-contain" />
         ) : (
           <div className="py-10 text-8xl">{prize.emoji}</div>
         )}
       </div>
-      <p className="text-xl font-bold text-foreground">{prize.name}</p>
+      <p className="text-lg font-bold sm:text-xl text-foreground">{prize.name}</p>
       <p className="text-muted-foreground">Cadastre seus dados para resgatar seu prêmio. A oferta é válida por tempo limitado.</p>
-      <Button onClick={onClaim} size="lg" className="h-14 w-full text-xl font-bold uppercase tracking-wider font-display animate-pulse-glow">
+      <Button onClick={onClaim} size="lg" className="h-14 w-full text-lg sm:text-xl font-bold uppercase tracking-wider font-display animate-pulse-glow">
         Resgatar prêmio
       </Button>
     </div>

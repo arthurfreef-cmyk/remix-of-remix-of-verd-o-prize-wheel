@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
 import logo from "@/assets/palmeiras-logo.png";
@@ -12,6 +13,13 @@ export function DeliveryScreen({ prize, customerName }: { prize: Prize; customer
   const [size, setSize] = useState<string>("");
   const [validationError, setValidationError] = useState("");
   const checkout = useVelaniCheckout();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (checkout.status === "paid") {
+      void navigate({ to: "/$slug", params: { slug: "upsell-frete" } });
+    }
+  }, [checkout.status, navigate]);
 
   const handlePayment = () => {
     if (!size) {

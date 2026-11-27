@@ -8,6 +8,7 @@ import { WheelScreen } from "@/components/funnel/WheelScreen";
 import { ResultScreen } from "@/components/funnel/ResultScreen";
 import { ClaimScreen } from "@/components/funnel/ClaimScreen";
 import { LoadingScreen } from "@/components/funnel/LoadingScreen";
+import { DeliveryScreen } from "@/components/funnel/DeliveryScreen";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
 import { questions } from "@/data/funnel";
@@ -16,9 +17,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Desafio do Verdão — Roleta Premiada" },
-      { name: "description", content: "Responda o quiz do Palmeiras e gire a roleta para ganhar camisas oficiais." },
+      { name: "description", content: "Responda ao desafio e descubra o resultado da roleta." },
       { property: "og:title", content: "Desafio do Verdão — Roleta Premiada" },
-      { property: "og:description", content: "Responda o quiz do Palmeiras e gire a roleta para ganhar camisas oficiais." },
+      { property: "og:description", content: "Responda ao desafio e descubra o resultado da roleta." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Step = "home" | "quiz" | "analysis" | "not-qualified" | "wheel" | "result" | "claim" | "loading" | "done";
+type Step = "home" | "quiz" | "analysis" | "not-qualified" | "wheel" | "result" | "claim" | "loading" | "delivery";
 
 function Index() {
   const [step, setStep] = useState<Step>("home");
@@ -39,7 +40,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      {step !== "analysis" && step !== "loading" && <Header />}
+      {step !== "analysis" && step !== "loading" && step !== "delivery" && <Header />}
       {step === "home" && <HomeScreen onStart={() => { setQuizScore(0); setStep("quiz"); }} />}
       {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("analysis"); }} />}
       {step === "analysis" && (
@@ -64,14 +65,8 @@ function Index() {
       {step === "wheel" && <WheelScreen score={quizScore} onWin={(p) => { setPrize(p); setStep("result"); }} />}
       {step === "result" && prize && <ResultScreen prize={prize} score={quizScore} total={questions.length} onClaim={() => setStep("claim")} />}
       {step === "claim" && prize && <ClaimScreen prize={prize} onDone={() => setStep("loading")} />}
-      {step === "loading" && <LoadingScreen onFinish={() => setStep("done")} />}
-      {step === "done" && (
-        <div className="mx-auto max-w-md animate-pop-in space-y-4 px-6 py-16 text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-primary text-4xl">✅</div>
-          <h2 className="text-2xl font-bold uppercase text-foreground">Resgate confirmado!</h2>
-          <p className="text-muted-foreground">Entraremos em contato para combinar o envio do seu prêmio. Avanti, Palestra! 💚</p>
-        </div>
-      )}
+      {step === "loading" && <LoadingScreen onFinish={() => setStep("delivery")} />}
+      {step === "delivery" && prize && <DeliveryScreen prize={prize} />}
     </div>
   );
 }

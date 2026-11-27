@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export function HomeScreen({ onStart }: { onStart: () => void }) {
+export function HomeScreen({ onStart, onPrefetch }: { onStart: () => void; onPrefetch: () => void }) {
   return (
     <main className="flex min-h-[calc(100svh-5rem)] flex-col bg-white text-center text-neutral-950">
       <section className="mx-auto flex w-full max-w-xl flex-1 flex-col items-center px-6 pb-8 pt-10 sm:pt-12">
@@ -20,6 +20,9 @@ export function HomeScreen({ onStart }: { onStart: () => void }) {
 
         <Button
           onClick={onStart}
+          onPointerEnter={onPrefetch}
+          onFocus={onPrefetch}
+          onTouchStart={onPrefetch}
           size="lg"
           className="h-[54px] w-full max-w-[320px] rounded-md bg-[#087A3D] text-lg font-semibold uppercase text-white shadow-sm hover:bg-[#066532]"
         >

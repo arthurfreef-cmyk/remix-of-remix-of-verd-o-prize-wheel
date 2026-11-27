@@ -61,6 +61,10 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
               <span className="text-base font-semibold text-slate-400 line-through">R$ 359,00</span>
               <span className="text-2xl font-black text-[#087a45]">R$ 0,00</span>
             </div>
+            <div className="mx-auto mt-3 max-w-[260px] rounded-xl border-2 border-emerald-600 bg-emerald-50 px-4 py-3 text-center">
+              <p className="text-xs font-extrabold uppercase tracking-wide text-[#075b32]">Taxa fixa de frete SEDEX</p>
+              <p className="mt-1 text-2xl font-black text-[#087a45]">R$ 37,82</p>
+            </div>
           </div>
         </div>
 
@@ -86,7 +90,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
               Frete via SEDEX
             </div>
             <p className="mt-1 text-sm leading-relaxed text-slate-700">
-              Taxa fixa de envio via SEDEX: R$ 37,82.
+              Envio via SEDEX com taxa fixa.
             </p>
           </div>
 

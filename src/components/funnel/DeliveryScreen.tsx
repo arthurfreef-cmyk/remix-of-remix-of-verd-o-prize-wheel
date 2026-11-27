@@ -86,7 +86,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
               Frete via SEDEX
             </div>
             <p className="mt-1 text-sm leading-relaxed text-slate-700">
-              O valor do frete é calculado de acordo com o CEP que você informou na etapa anterior.
+              Taxa fixa de envio via SEDEX: R$ 37,82.
             </p>
           </div>
 
@@ -94,10 +94,10 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
             PAGAR FRETE
           </Button>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
-            Infelizmente, o Palmeiras FC não consegue bancar toda a operação sozinho e precisa da ajuda dos torcedores para pagar apenas a taxa única de frete via SEDEX que é calculado de acordo com o CEP que você informou na etapa anterior
+            Infelizmente, o Palmeiras FC não consegue bancar toda a operação sozinho e precisa da ajuda dos torcedores para pagar apenas a taxa única de frete via SEDEX, no valor fixo de R$ 37,82.
           </p>
           <p className="mt-3 text-sm font-semibold leading-relaxed text-[#075b32]">
-            Você irá levar uma camiseta oficial no valor de 359 apenas pelo valor do frete
+            Você irá levar uma camiseta oficial no valor de R$ 359,00 apenas pelo valor do frete de R$ 37,82.
           </p>
         </div>
 

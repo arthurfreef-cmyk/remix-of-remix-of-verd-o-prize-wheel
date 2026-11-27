@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import campeaoAsset from "@/assets/palmeiras-campeao-2026.jpg.asset.json";
 
 export function HomeScreen({ onStart, onPrefetch }: { onStart: () => void; onPrefetch: () => void }) {
   return (
@@ -15,6 +16,18 @@ export function HomeScreen({ onStart, onPrefetch }: { onStart: () => void; onPre
         <p className="mb-7 text-[19px] leading-[1.42]">
           Se você é torcedor raiz e quer provar os seus conhecimentos sobre o clube e ganhar um manto sagrado oficial, vai precisar acertar pelo menos 3 perguntas no nosso jogo de perguntas e respostas para provar que é torcedor alviverde!
         </p>
+
+        <div className="mb-6 w-full sm:mb-8">
+          <img
+            src={campeaoAsset.url}
+            alt="Elenco do Palmeiras campeão do Campeonato Paulista 2026"
+            width={1080}
+            height={1350}
+            loading="eager"
+            decoding="async"
+            className="mx-auto block w-full max-w-[320px] rounded-xl object-cover shadow-lg ring-2 ring-primary/25 sm:max-w-[380px]"
+          />
+        </div>
 
         <p className="mb-4 text-base sm:text-[19px] font-bold">clique no botão abaixo:</p>
 

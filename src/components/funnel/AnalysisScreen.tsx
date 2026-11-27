@@ -29,22 +29,22 @@ export function AnalysisScreen({ score, total, onFinish }: { score: number; tota
   const transitioning = phase === "transition";
 
   return (
-    <main className="flex min-h-[100svh] flex-col bg-white px-[18px] pb-8 text-center text-neutral-900">
-      <header className="flex h-[118px] shrink-0 items-center justify-center bg-[#075B32]">
-        <img src={logo} alt="Palmeiras" className="h-[88px] w-[88px] object-contain" />
+    <main className="flex min-h-[100svh] flex-col bg-white px-4 pb-6 sm:px-[18px] sm:pb-8 text-center text-neutral-900">
+      <header className="flex h-[88px] sm:h-[118px] shrink-0 items-center justify-center bg-[#075B32]">
+        <img src={logo} alt="Palmeiras" className="h-[68px] w-[68px] sm:h-[88px] sm:w-[88px] object-contain" />
       </header>
 
       <section
-        className={`flex flex-1 flex-col items-center pt-[clamp(105px,19vh,160px)] transition-all duration-500 ease-in-out ${transitioning ? "translate-y-3 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"}`}
+        className={`flex flex-1 flex-col items-center pt-[clamp(48px,10svh,120px)] sm:pt-[clamp(80px,14vh,150px)] transition-all duration-500 ease-in-out ${transitioning ? "translate-y-3 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"}`}
         aria-live="polite"
       >
         <div
-          className="h-24 w-24 animate-spin rounded-full border-[9px] border-[#dceee3] border-t-[#087A3D]"
+          className="h-20 w-20 sm:h-24 sm:w-24 animate-spin rounded-full border-[9px] border-[#dceee3] border-t-[#087A3D]"
           role="status"
           aria-label={phase === "preparing" ? "Preparando roleta" : "Analisando respostas"}
         />
         {phase === "checking" ? (
-          <h1 className="mt-9 max-w-sm text-[22px] font-extrabold leading-tight text-[#087A3D]">
+          <h1 className="mt-7 max-w-sm px-2 text-xl sm:mt-9 sm:text-[22px] font-extrabold leading-tight text-[#087A3D]">
             Estamos analisando suas respostas...
           </h1>
         ) : phase === "preparing" ? (
@@ -59,13 +59,13 @@ export function AnalysisScreen({ score, total, onFinish }: { score: number; tota
         ) : null}
       </section>
 
-      <p className="mx-auto mb-5 mt-8 max-w-md text-[17px] font-semibold leading-relaxed text-neutral-800">
+      <p className="mx-auto mb-4 mt-6 max-w-md px-1 text-base sm:mb-5 sm:mt-8 sm:text-[17px] font-semibold leading-relaxed text-neutral-800">
         {phase === "preparing"
           ? "Sua pontuação foi confirmada. Você atingiu a pontuação mínima e a roleta está sendo preparada!"
           : "Caso você tenha acertado pelo menos 3 perguntas será automaticamente redirecionado!"}
       </p>
 
-      <footer className="flex min-h-[62px] w-full shrink-0 items-center justify-center bg-[#075B32] px-3 py-4 text-center text-[16px] font-semibold text-white">
+      <footer className="flex min-h-[54px] w-full shrink-0 items-center justify-center bg-[#075B32] px-3 py-3 text-center text-sm sm:py-4 sm:text-[16px] font-semibold text-white">
         Direitos reservados, Palmeiras
       </footer>
     </main>

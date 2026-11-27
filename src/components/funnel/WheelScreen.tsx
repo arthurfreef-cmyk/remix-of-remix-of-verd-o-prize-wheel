@@ -78,16 +78,16 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
             <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sua pontuação</p>
             <p className="mt-1 text-2xl font-extrabold text-emerald-800">{score}<span className="text-sm text-slate-500">/5</span></p>
           </div>
-          <div className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 shadow-lg backdrop-blur-sm">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/65">Tentativas</p>
-            <p className="mt-1 text-2xl font-black text-[#f6e4a9]">{Math.max(0, 2 - spins)}<span className="text-sm text-white/65"> disponíveis</span></p>
+          <div className="rounded-2xl border border-emerald-900 bg-emerald-950 px-3 py-3 shadow-lg">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white">Tentativas</p>
+            <p className="mt-1 text-2xl font-black text-[#f6e4a9]">{Math.max(0, 2 - spins)}<span className="text-sm text-white"> disponíveis</span></p>
           </div>
         </div>
 
         <div className="mx-auto mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
           <p className="text-sm font-bold text-emerald-900">Sua missão agora é simples:</p>
           <p className="mt-1 text-sm leading-relaxed text-slate-600">
-            Toque em <strong className="text-white">GIRAR A ROLETA</strong>, acompanhe o giro até parar e confira o resultado. Se aparecer “Tente novamente”, você poderá fazer outra tentativa.
+            Toque em <strong className="text-emerald-900">GIRAR A ROLETA</strong>, acompanhe o giro até parar e confira o resultado. Se aparecer “Tente novamente”, você poderá fazer outra tentativa.
           </p>
         </div>
 

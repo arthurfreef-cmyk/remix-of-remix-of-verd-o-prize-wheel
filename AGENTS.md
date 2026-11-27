@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Funnel
+- Funnel steps (home → quiz → wheel → result → claim → done) live as client state in src/routes/index.tsx; screens in src/components/funnel. Why: single-page funnel copied from the Verdão Prize Wheel project.
+- Wheel outcomes are scripted in src/data/funnel.ts (targetForSpin): spin 1 = "Tente novamente", spin 2 = main prize; covered by src/test/funnel.test.ts. Why: deterministic funnel flow.

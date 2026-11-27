@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Header } from "@/components/funnel/Header";
 import { HomeScreen } from "@/components/funnel/HomeScreen";
-import { QuizScreen } from "@/components/funnel/QuizScreen";
+let quizScreenPromise: Promise<typeof import("@/components/funnel/QuizScreen")> | undefined;
+const loadQuizScreen = () => (quizScreenPromise ??= import("@/components/funnel/QuizScreen"));
+const QuizScreen = lazy(loadQuizScreen);
 import { AnalysisScreen } from "@/components/funnel/AnalysisScreen";
 import { WheelScreen } from "@/components/funnel/WheelScreen";
 import { ResultScreen } from "@/components/funnel/ResultScreen";
@@ -41,8 +43,12 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       {step !== "analysis" && step !== "loading" && step !== "delivery" && <Header />}
-      {step === "home" && <HomeScreen onStart={() => { setQuizScore(0); setStep("quiz"); }} />}
-      {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("analysis"); }} />}
+      {step === "home" && <HomeScreen onPrefetch={() => { void loadQuizScreen(); }} onStart={() => { void loadQuizScreen(); setQuizScore(0); setStep("quiz"); }} />}
+      {step === "quiz" && (
+        <Suspense fallback={<main className="mx-auto flex min-h-[60svh] max-w-md items-center justify-center px-6"><p className="text-base font-semibold text-primary">Preparando o desafio...</p></main>}>
+          <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("analysis"); }} />
+        </Suspense>
+      )}
       {step === "analysis" && (
         <AnalysisScreen
           score={quizScore}

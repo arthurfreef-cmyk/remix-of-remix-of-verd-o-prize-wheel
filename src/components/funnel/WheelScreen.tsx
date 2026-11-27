@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { prizes, rotationFor, targetForSpin, type Prize } from "@/data/funnel";
 import { playLose, playTick } from "@/lib/sounds";
@@ -20,6 +20,15 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
   const [message, setMessage] = useState<string | null>(null);
   const [won, setWon] = useState(false);
   const tickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    prizes.forEach((prize) => {
+      if (!prize.image) return;
+      const image = new Image();
+      image.decoding = "async";
+      image.src = prize.image;
+    });
+  }, []);
 
   const spin = () => {
     if (spinning || won) return;
@@ -62,10 +71,6 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
   return (
     <main className="min-h-[calc(100svh-5rem)] bg-[#f5f7f5] px-4 pb-10 pt-6 text-center text-slate-900">
       <div className="mx-auto max-w-md">
-        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-emerald-800">
-          <span aria-hidden>★</span> Etapa desbloqueada <span aria-hidden>★</span>
-        </div>
-
         <h1 className="mt-4 text-2xl font-extrabold leading-tight text-emerald-950 sm:text-3xl">
           Você chegou à roleta!
         </h1>
@@ -168,13 +173,6 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
         >
           {spinning ? "Boa sorte! Girando..." : won ? "Resultado confirmado" : "GIRAR A ROLETA"}
         </Button>
-
-        <div className="mt-5 rounded-xl border border-slate-200 bg-white px-4 py-4 text-left">
-          <p className="text-sm font-bold text-emerald-900">O que pode aparecer?</p>
-          <p className="mt-1 text-xs leading-relaxed text-slate-600">
-            Camisas do Palmeiras e outros itens exibidos nos setores da roleta. O resultado será mostrado assim que o giro terminar.
-          </p>
-        </div>
 
         <p className="mt-5 text-xs leading-relaxed text-slate-500">
           Confira o resultado na tela seguinte e siga as instruções apresentadas para consultar as condições de participação e resgate.

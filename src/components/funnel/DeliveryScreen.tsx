@@ -47,7 +47,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
           <div className="p-4">
             <div className="mx-auto flex min-h-[250px] max-w-[300px] items-center justify-center rounded-xl bg-[#f5f8f5] p-3">
               {prize.image ? (
-                <img src={prize.image} alt={prize.name} className="max-h-[290px] w-full object-contain" />
+                <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="max-h-[290px] w-full object-contain" />
               ) : (
                 <span className="text-8xl">{prize.emoji}</span>
               )}

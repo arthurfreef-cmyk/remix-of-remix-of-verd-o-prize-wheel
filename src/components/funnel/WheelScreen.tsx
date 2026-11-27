@@ -69,16 +69,16 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
   };
 
   return (
-    <main className="min-h-[calc(100svh-5rem)] bg-[#f5f7f5] px-4 pb-10 pt-6 text-center text-slate-900">
+    <main className="min-h-[calc(100svh-5rem)] bg-[#f5f7f5] px-3 pb-7 pt-3 sm:px-4 sm:pb-10 sm:pt-6 text-center text-slate-900">
       <div className="mx-auto max-w-md">
-        <h1 className="mt-4 text-2xl font-extrabold leading-tight text-emerald-950 sm:text-3xl">
+        <h1 className="mt-2 text-2xl sm:mt-4 sm:text-2xl font-extrabold leading-tight text-emerald-950 sm:text-3xl">
           Você chegou à roleta!
         </h1>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slate-600 sm:text-base">
           Mandou bem no desafio, palmeirense! Você conquistou acesso à Roleta do Verdão. Agora é hora de girar e descobrir qual prêmio a sua participação vai revelar.
         </p>
 
-        <div className="mx-auto mt-5 grid max-w-sm grid-cols-2 gap-3">
+        <div className="mx-auto mt-4 grid max-w-sm sm:mt-5 grid-cols-2 gap-3">
           <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
             <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sua pontuação</p>
             <p className="mt-1 text-2xl font-extrabold text-emerald-800">{score}<span className="text-sm text-slate-500">/5</span></p>
@@ -89,14 +89,14 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           </div>
         </div>
 
-        <div className="mx-auto mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
+        <div className="mx-auto mt-3 rounded-xl border sm:mt-4 border-slate-200 bg-white px-4 py-3 text-left">
           <p className="text-sm font-bold text-emerald-900">Sua missão agora é simples:</p>
           <p className="mt-1 text-sm leading-relaxed text-slate-600">
             Toque em <strong className="text-emerald-900">GIRAR A ROLETA</strong>, acompanhe o giro até parar e confira o resultado. Se aparecer “Tente novamente”, você poderá fazer outra tentativa.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-7 w-full max-w-[340px]">
+        <div className="relative mx-auto mt-5 w-[min(84vw,340px)] max-w-[340px] sm:mt-7">
           <div className="absolute -inset-2 rounded-full bg-emerald-900/5 blur-lg" />
           <div className="absolute left-1/2 top-[-17px] z-20 -translate-x-1/2 drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)]">
             <svg width="42" height="52" viewBox="0 0 42 52" aria-hidden>
@@ -177,7 +177,7 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           </div>
         </div>
 
-        <div className="mx-auto mt-6 min-h-[58px] max-w-sm" aria-live="polite">
+        <div className="mx-auto mt-4 min-h-[58px] sm:mt-6 max-w-sm" aria-live="polite">
           {message ? (
             <p className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm font-semibold text-emerald-900">{message}</p>
           ) : (
@@ -197,7 +197,7 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           {spinning ? "Boa sorte! Girando..." : won ? "Resultado confirmado" : "GIRAR A ROLETA"}
         </Button>
 
-        <p className="mt-5 text-xs leading-relaxed text-slate-500">
+        <p className="mt-4 text-xs sm:mt-5 leading-relaxed text-slate-500">
           Confira o resultado na tela seguinte e siga as instruções apresentadas para consultar as condições de participação e resgate.
         </p>
       </div>

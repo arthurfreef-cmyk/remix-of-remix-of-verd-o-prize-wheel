@@ -110,7 +110,7 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
         <form onSubmit={submit} className="space-y-5 p-5 sm:p-6">
           <div className="flex items-center gap-3 rounded-2xl border border-emerald-800/10 bg-emerald-50 p-3">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white">
-              {prize.image ? <img src={prize.image} alt={prize.name} className="h-full w-full object-contain" /> : <span className="text-3xl">{prize.emoji}</span>}
+              {prize.image ? <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="h-full w-full object-contain" /> : <span className="text-3xl">{prize.emoji}</span>}
             </div>
             <div className="min-w-0 text-left">
               <p className="text-xs font-bold uppercase tracking-wide text-emerald-800/70">Prêmio selecionado</p>

@@ -32,17 +32,17 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
   };
 
   return (
-    <div className={cn("mx-auto max-w-md px-6 py-8 transition-all duration-300", leaving ? "-translate-x-12 opacity-0" : "opacity-100")}>
-      <div className="mb-6 flex items-center justify-between gap-3">
+    <div className={cn("mx-auto w-full max-w-md px-4 py-5 sm:px-6 sm:py-8 transition-all duration-300", leaving ? "-translate-x-12 opacity-0" : "opacity-100")}>
+      <div className="mb-4 flex items-center sm:mb-6 justify-between gap-3">
         <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           Pergunta {current + 1} de {questions.length}
         </p>
       </div>
-      <div className="mb-6 h-2 overflow-hidden rounded-full bg-border">
+      <div className="mb-5 h-2 sm:mb-6 overflow-hidden rounded-full bg-border">
         <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${((current + 1) / questions.length) * 100}%` }} />
       </div>
-      <h2 className="mb-8 mt-2 text-center text-2xl font-bold text-foreground">{q.question}</h2>
-      <div className="space-y-3">
+      <h2 className="mb-6 mt-2 text-center text-xl leading-snug sm:mb-8 sm:text-2xl font-bold text-foreground">{q.question}</h2>
+      <div className="space-y-2.5 sm:space-y-3">
         {q.options.map((opt, idx) => {
           return (
             <button
@@ -50,7 +50,7 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
               onClick={() => choose(idx)}
               disabled={selected !== null}
               className={cn(
-                "w-full rounded-lg border-2 px-6 py-4 text-base font-semibold transition-all",
+                "w-full rounded-lg border-2 px-4 py-4 text-[15px] leading-snug sm:px-6 sm:text-base font-semibold transition-all",
                 "border-primary bg-primary text-primary-foreground",
                 selected === null && "hover:scale-[1.02]",
               )}
@@ -60,7 +60,7 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
           );
         })}
       </div>
-      <div className="mt-6 flex justify-center gap-2">
+      <div className="mt-5 flex justify-center sm:mt-6 gap-2">
         {questions.map((_, i) => (
           <div key={i} className={cn("h-2 w-8 rounded-full transition-colors", i <= current ? "bg-primary" : "bg-border")} />
         ))}

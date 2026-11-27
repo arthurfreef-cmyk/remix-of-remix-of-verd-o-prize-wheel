@@ -7,16 +7,14 @@ import { playWin } from "@/lib/sounds";
 export function ResultScreen({ prize, score, total, onClaim }: { prize: Prize; score: number; total: number; onClaim: () => void }) {
   useEffect(() => {
     playWin();
-    const end = Date.now() + 2500;
     const colors = ["#006437", "#ffffff", "#d4af37"];
-    let raf = 0;
-    const frame = () => {
-      void confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors });
-      void confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors });
-      if (Date.now() < end) raf = requestAnimationFrame(frame);
-    };
-    frame();
-    return () => cancelAnimationFrame(raf);
+    const timers = [0, 350, 700, 1050, 1400].map((delay) =>
+      window.setTimeout(() => {
+        void confetti({ particleCount: 24, angle: 60, spread: 55, origin: { x: 0 }, colors });
+        void confetti({ particleCount: 24, angle: 120, spread: 55, origin: { x: 1 }, colors });
+      }, delay)
+    );
+    return () => timers.forEach(window.clearTimeout);
   }, []);
 
   return (
@@ -29,7 +27,7 @@ export function ResultScreen({ prize, score, total, onClaim }: { prize: Prize; s
       </div>
       <div className="mx-auto max-w-xs rounded-2xl bg-secondary p-4">
         {prize.image ? (
-          <img src={prize.image} alt={prize.name} className="w-full rounded-xl object-cover" />
+          <img src={prize.image} alt={prize.name} loading="eager" fetchPriority="high" decoding="async" className="h-64 w-full rounded-xl object-contain" />
         ) : (
           <div className="py-10 text-8xl">{prize.emoji}</div>
         )}

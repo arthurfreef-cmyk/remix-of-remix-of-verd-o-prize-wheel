@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
-import { CheckCircle2, Truck, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Truck } from "lucide-react";
+import logo from "@/assets/palmeiras-logo.png";
 
 const sizes = ["P", "M", "G", "GG", "G1"];
 
@@ -15,7 +16,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
       return;
     }
     if (!checkoutUrl) {
-      window.alert("O checkout de frete ainda não está conectado. Configure VITE_SHIPPING_CHECKOUT_URL para habilitar o pagamento.");
+      window.alert("O checkout de frete ainda não está conectado.");
       return;
     }
     const url = new URL(checkoutUrl, window.location.origin);
@@ -26,8 +27,8 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
 
   return (
     <main className="min-h-[100svh] bg-white px-4 py-4">
-      <header className="mx-auto flex min-h-[86px] w-full max-w-md items-center justify-center bg-[#087a45] px-4 text-center">
-        <p className="text-lg font-black uppercase tracking-wide text-white">Palmeiras FC</p>
+      <header className="mx-auto flex min-h-[86px] w-full max-w-md items-center justify-center bg-[#087a45] px-4">
+        <img src={logo} alt="Escudo do Palmeiras" className="h-[68px] w-[68px] object-contain" />
       </header>
 
       <section className="mx-auto w-full max-w-md pb-8 pt-7">
@@ -36,10 +37,10 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
             <CheckCircle2 className="h-8 w-8 text-[#087a45]" />
           </div>
           <h1 className="mt-4 text-2xl font-black leading-tight text-[#075b32]">
-            Seu endereço foi cadastrado!
+            Seu endereço foi cadastrado e seu prêmio foi reservado!
           </h1>
           <p className="mt-2 text-base font-semibold leading-relaxed text-slate-800">
-            Seu resultado foi registrado. Escolha o tamanho da sua camiseta e confira o valor do frete para receber seu prêmio.
+            Escolha o tamanho da sua camiseta e pague a taxa de frete para receber o seu prêmio.
           </p>
         </div>
 
@@ -60,7 +61,6 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
               <span className="text-base font-semibold text-slate-400 line-through">R$ 359,00</span>
               <span className="text-2xl font-black text-[#087a45]">R$ 0,00</span>
             </div>
-            <p className="mt-1 text-center text-xs text-slate-500">Valor do produto referente ao prêmio da roleta.</p>
           </div>
         </div>
 
@@ -86,7 +86,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
               Frete via SEDEX
             </div>
             <p className="mt-1 text-sm leading-relaxed text-slate-700">
-              O valor do frete será calculado conforme o CEP informado e apresentado antes da confirmação do pagamento.
+              O valor do frete é calculado de acordo com o CEP que você informou na etapa anterior.
             </p>
           </div>
 
@@ -94,19 +94,15 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
             PAGAR FRETE
           </Button>
           <p className="mt-4 text-sm leading-relaxed text-slate-600">
-            Infelizmente, o Palmeiras FC não consegue bancar toda a operação sozinho e precisa da ajuda dos torcedores para custear a taxa única de envio via SEDEX. O valor será calculado de acordo com o CEP informado na etapa anterior e exibido antes do pagamento.
+            Infelizmente, o Palmeiras FC não consegue bancar toda a operação sozinho e precisa da ajuda dos torcedores para pagar apenas a taxa única de frete via SEDEX que é calculado de acordo com o CEP que você informou na etapa anterior
           </p>
           <p className="mt-3 text-sm font-semibold leading-relaxed text-[#075b32]">
-            Você poderá receber a camiseta sorteada, com valor de referência de R$ 359,00, pagando apenas o frete apresentado no checkout.
+            Você irá levar uma camiseta oficial no valor de 359 apenas pelo valor do frete
           </p>
-          <div className="mt-4 flex items-start gap-2 rounded-lg bg-slate-50 p-3 text-xs leading-relaxed text-slate-600">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#087a45]" />
-            Confira o valor, o prazo e as condições de entrega antes de concluir o pagamento.
-          </div>
         </div>
 
         <footer className="mt-6 flex min-h-[74px] flex-col items-center justify-center gap-1 bg-[#087a45] px-4 py-3 text-center text-white">
-          <span className="text-base font-black tracking-wide">PALMEIRAS FC</span>
+          <img src={logo} alt="Escudo do Palmeiras" className="h-10 w-10 object-contain" />
           <span className="text-xs font-medium text-white/90">Todos os direitos reservados.</span>
         </footer>
       </section>

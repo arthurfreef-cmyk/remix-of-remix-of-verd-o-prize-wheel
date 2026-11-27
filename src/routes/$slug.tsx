@@ -75,7 +75,7 @@ function UpsellPage() {
           <div className="text-6xl">💚</div>
           <h1 className="mt-5 text-3xl font-black text-[#075b32]">Obrigado, torcedor!</h1>
           <p className="mt-3 text-base leading-relaxed text-slate-700">As etapas desta experiência foram concluídas. Consulte as confirmações do seu pedido e os canais oficiais para acompanhar a entrega.</p>
-          <a href="/" className="mt-7 w-full"><Button className="h-14 w-full rounded-xl text-base font-black">VOLTAR AO INÍCIO</Button></a>
+          <Button onClick={() => { window.location.assign("/"); }} className="mt-7 h-14 w-full rounded-xl text-base font-black">VOLTAR AO INÍCIO</Button>
         </section>
         <PageFooter />
       </main>
@@ -88,7 +88,7 @@ function UpsellPage() {
         <PageHeader />
         <section className="mx-auto flex min-h-[55svh] max-w-md flex-col items-center justify-center text-center">
           <h1 className="text-2xl font-black text-[#075b32]">Página não encontrada</h1>
-          <a href="/" className="mt-5"><Button>Voltar ao início</Button></a>
+          <Button onClick={() => { window.location.assign("/"); }} className="mt-5">Voltar ao início</Button>
         </section>
         <PageFooter />
       </main>
@@ -110,12 +110,10 @@ function UpsellPage() {
           {offer.note && <p className="mt-4 rounded-xl bg-slate-50 p-3 text-xs leading-relaxed text-slate-600">{offer.note}</p>}
         </div>
         <div className="mt-5 space-y-3">
-          <a href={offer.next} className="block">
-            <Button className="h-14 w-full rounded-xl text-sm font-black uppercase tracking-wide shadow-lg">{offer.acceptLabel}</Button>
-          </a>
-          <a href={offer.decline} className="block text-center text-sm font-semibold text-slate-500 underline underline-offset-4">
+          <Button onClick={() => { window.location.assign(offer.next); }} className="h-14 w-full rounded-xl text-sm font-black uppercase tracking-wide shadow-lg">{offer.acceptLabel}</Button>
+          <Button variant="ghost" onClick={() => { window.location.assign(offer.decline); }} className="h-11 w-full text-sm font-semibold text-slate-500">
             Não, obrigado. Continuar
-          </a>
+          </Button>
         </div>
       </section>
       <PageFooter />

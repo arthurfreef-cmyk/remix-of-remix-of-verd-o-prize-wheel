@@ -30,5 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Funnel
+- Guest shipping checkout calls Velani through client-safe server functions; signed intents bind the customer, prize, size and idempotency key, and status reads require a signed receipt. Why: keep credentials server-only, prevent duplicate retries, and confirm payment with the provider rather than the browser.
 - Funnel steps (home → quiz → wheel → result → claim → done) live as client state in src/routes/index.tsx; screens in src/components/funnel. Why: single-page funnel copied from the Verdão Prize Wheel project.
 - Wheel outcomes are scripted in src/data/funnel.ts (targetForSpin): spin 1 = "Tente novamente", spin 2 = main prize; covered by src/test/funnel.test.ts. Why: deterministic funnel flow.

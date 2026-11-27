@@ -35,6 +35,7 @@ function Index() {
   const [step, setStep] = useState<Step>("home");
   const [prize, setPrize] = useState<Prize | null>(null);
   const [quizScore, setQuizScore] = useState(0);
+  const [customerName, setCustomerName] = useState("");
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -70,9 +71,9 @@ function Index() {
       )}
       {step === "wheel" && <WheelScreen score={quizScore} onWin={(p) => { setPrize(p); setStep("result"); }} />}
       {step === "result" && prize && <ResultScreen prize={prize} score={quizScore} total={questions.length} onClaim={() => setStep("claim")} />}
-      {step === "claim" && prize && <ClaimScreen prize={prize} onDone={() => setStep("loading")} />}
+      {step === "claim" && prize && <ClaimScreen prize={prize} onDone={(name) => { setCustomerName(name); setStep("loading"); }} />}
       {step === "loading" && <LoadingScreen onFinish={() => setStep("delivery")} />}
-      {step === "delivery" && prize && <DeliveryScreen prize={prize} />}
+      {step === "delivery" && prize && <DeliveryScreen prize={prize} customerName={customerName} />}
     </div>
   );
 }

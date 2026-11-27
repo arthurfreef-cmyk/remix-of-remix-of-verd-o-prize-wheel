@@ -14,7 +14,7 @@ type AddressForm = {
   estado: string;
 };
 
-export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => void }) {
+export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: (customerName: string) => void }) {
   const [form, setForm] = useState<AddressForm>({
     nome: "",
     cep: "",
@@ -79,7 +79,7 @@ export function ClaimScreen({ prize, onDone }: { prize: Prize; onDone: () => voi
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onDone();
+    onDone(form.nome.trim());
   };
 
   const field = (key: keyof AddressForm, label: string, placeholder: string, onChange?: (value: string) => void) => (

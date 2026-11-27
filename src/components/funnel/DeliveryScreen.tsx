@@ -2,26 +2,29 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
 import logo from "@/assets/palmeiras-logo.png";
+import { Loader2 } from "lucide-react";
+import { checkoutInputSchema, shirtSizes, SHIPPING_LABEL } from "@/lib/velani";
+import { useVelaniCheckout } from "@/hooks/use-velani-checkout";
+import { PixPaymentPanel } from "./PixPaymentPanel";
+import { cn } from "@/lib/utils";
 
-const sizes = ["P", "M", "G", "GG", "G1"];
-
-export function DeliveryScreen({ prize }: { prize: Prize }) {
+export function DeliveryScreen({ prize, customerName }: { prize: Prize; customerName: string }) {
   const [size, setSize] = useState<string>("");
+  const [validationError, setValidationError] = useState("");
+  const checkout = useVelaniCheckout();
 
   const handlePayment = () => {
-    const checkoutUrl = import.meta.env["VITE_SHIPPING_CHECKOUT_URL"] as string | undefined;
     if (!size) {
-      window.alert("Selecione o tamanho da camiseta para continuar.");
+      setValidationError("Selecione o tamanho da camiseta para continuar.");
       return;
     }
-    if (!checkoutUrl) {
-      window.alert("O checkout de frete ainda não está conectado.");
+    const input = checkoutInputSchema.safeParse({ customerName, prizeId: prize.id, size });
+    if (!input.success) {
+      setValidationError("Confira o nome informado no resgate e o tamanho selecionado.");
       return;
     }
-    const url = new URL(checkoutUrl, window.location.origin);
-    url.searchParams.set("size", size);
-    url.searchParams.set("prize", prize.name);
-    window.location.assign(url.toString());
+    setValidationError("");
+    checkout.begin(input.data);
   };
 
   return (
@@ -59,7 +62,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
             </div>
             <div className="mx-auto mt-3 max-w-[260px] rounded-xl border-2 border-emerald-600 bg-emerald-50 px-4 py-3 text-center">
               <p className="text-xs font-extrabold uppercase tracking-wide text-[#075b32]">Taxa de frete SEDEX</p>
-              <p className="mt-1 text-2xl font-black text-[#087a45]">R$ 37,82</p>
+              <p className="mt-1 text-2xl font-black text-[#087a45]">{SHIPPING_LABEL}</p>
             </div>
           </div>
         </div>
@@ -67,22 +70,27 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
         <div className="mt-5 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-[0_10px_30px_rgba(4,55,31,0.08)]">
           <h2 className="text-center text-lg font-black text-slate-900">Escolha o tamanho da sua camiseta</h2>
           <div className="mt-4 grid grid-cols-5 gap-1.5 sm:gap-2" role="group" aria-label="Tamanho da camiseta">
-            {sizes.map((item) => (
-              <button
+            {shirtSizes.map((item) => (
+              <Button
                 key={item}
                 type="button"
+                variant="outline"
+                disabled={checkout.isCreating || checkout.payment !== null}
                 aria-pressed={size === item}
-                onClick={() => setSize(item)}
-                className={`flex h-12 min-w-0 items-center justify-center rounded-lg border-2 text-sm font-extrabold transition-colors ${size === item ? "border-[#087a45] bg-[#087a45] text-white shadow-md" : "border-slate-200 bg-white text-slate-800 hover:border-emerald-700"}`}
+                onClick={() => { setSize(item); setValidationError(""); }}
+                className={cn("h-12 min-w-0 rounded-lg border-2 px-0 text-sm font-extrabold", size === item && "border-primary bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground")}
               >
                 {item}
-              </button>
+              </Button>
             ))}
           </div>
 
-          <Button onClick={handlePayment} size="lg" className="mt-4 h-14 sm:mt-5 w-full rounded-xl bg-[#087a45] text-base font-black uppercase tracking-wide text-white shadow-lg hover:bg-[#06683a]">
-            PAGAR FRETE
-          </Button>
+          {!checkout.payment && <Button onClick={handlePayment} disabled={checkout.isCreating} size="lg" className="mt-4 h-14 sm:mt-5 w-full rounded-xl text-base font-black uppercase tracking-wide shadow-lg">
+            {checkout.isCreating && <Loader2 className="mr-2 h-5 w-5 animate-spin motion-reduce:animate-none" />}
+            {checkout.isCreating ? "GERANDO PIX..." : "PAGAR FRETE"}
+          </Button>}
+          {(validationError || checkout.creationError) && <p role="alert" className="mt-3 text-sm text-destructive">{validationError || checkout.creationError}</p>}
+          {checkout.payment && <PixPaymentPanel payment={checkout.payment} status={checkout.status} isChecking={checkout.isChecking} statusError={checkout.statusError} onCheck={checkout.check} />}
           <p className="mt-3 text-sm leading-relaxed sm:mt-4 text-slate-600">
             Infelizmente, o Palmeiras FC não consegue bancar toda a operação sozinho e precisa da ajuda dos torcedores para pagar apenas a taxa única de frete via SEDEX, no valor fixo de R$ 37,82.
           </p>

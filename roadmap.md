@@ -2,5 +2,6 @@
 - [x] Set a new signing secret for the remixed project.
 - [x] Configure the missing workspace Velani connector and link it to this project.
 - [x] Link the available Velani connection.
-- [ ] Integrate shipping PIX creation and verified payment status.
-- [ ] Test validation and payment flow without making a real charge.
+- [x] Connect PAGAR FRETE using the customer's name and selected shirt size.
+- [x] Integrate shipping PIX creation and verified payment status.
+- [x] Test validation, retry reuse and server-confirmed status; verify an unpaid live PIX in desktop/mobile UI.

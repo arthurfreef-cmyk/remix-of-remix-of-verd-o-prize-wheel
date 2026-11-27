@@ -10,7 +10,7 @@ export function HomeScreen({ onStart, onPrefetch }: { onStart: () => void; onPre
         </h1>
 
         <p className="mb-5 text-base leading-relaxed sm:mb-7 sm:text-[19px] leading-[1.42]">
-          O Verdão decidiu <strong>doar 300 camisetas oficiais</strong> para os torcedores que conseguirem provar que sabem sobre a história do Palmeiras!
+          O Verdão decidiu <strong>doar 2.500 camisetas oficiais</strong> para os torcedores que conseguirem provar que sabem sobre a história do Palmeiras!
         </p>
 
         <p className="mb-7 text-[19px] leading-[1.42]">
@@ -43,7 +43,7 @@ export function HomeScreen({ onStart, onPrefetch }: { onStart: () => void; onPre
         </Button>
 
         <p className="mt-auto pt-8 text-base sm:pt-12 sm:text-[19px] font-extrabold">
-          Serão apenas 300 camisetas!
+          Serão apenas 2.500 camisetas!
         </p>
       </section>
 

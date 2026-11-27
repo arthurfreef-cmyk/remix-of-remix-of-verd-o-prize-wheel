@@ -10,8 +10,32 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
   const q = questions[current];
   if (!q) return null;
 
+  const playAnswerSound = () => {
+    try {
+      const AudioContextClass = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextClass) return;
+      const audioContext = new AudioContextClass();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(660, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(880, audioContext.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.12, audioContext.currentTime + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.16);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.17);
+      oscillator.onended = () => void audioContext.close();
+    } catch {
+      // O som é opcional; a resposta continua normalmente se o navegador bloquear áudio.
+    }
+  };
+
   const choose = (idx: number) => {
     if (selected !== null) return;
+    playAnswerSound();
     setSelected(idx);
     const isCorrect = idx === q.correctIndex;
     if (isCorrect) {
@@ -65,6 +89,9 @@ export function QuizScreen({ onComplete }: { onComplete: (score: number) => void
           <div key={i} className={cn("h-2 w-8 rounded-full transition-colors", i <= current ? "bg-primary" : "bg-border")} />
         ))}
       </div>
+      <footer className="mt-8 border-t border-border pt-4 text-center text-xs font-semibold text-muted-foreground">
+        Direitos reservados, Palmeiras FC
+      </footer>
     </div>
   );
 }

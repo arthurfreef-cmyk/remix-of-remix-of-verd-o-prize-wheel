@@ -60,7 +60,7 @@ function Index() {
           </Button>
         </main>
       )}
-      {step === "wheel" && <WheelScreen onWin={(p) => { setPrize(p); setStep("result"); }} />}
+      {step === "wheel" && <WheelScreen score={quizScore} onWin={(p) => { setPrize(p); setStep("result"); }} />}
       {step === "result" && prize && <ResultScreen prize={prize} score={quizScore} total={questions.length} onClaim={() => setStep("claim")} />}
       {step === "claim" && prize && <ClaimScreen prize={prize} onDone={() => setStep("done")} />}
       {step === "done" && (

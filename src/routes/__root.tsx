@@ -169,12 +169,33 @@ function MetaPixelTracker() {
   return null;
 }
 
+function UTMifyTracker() {
+  useEffect(() => {
+    const utmifyWindow = window as typeof window & { pixelId?: string };
+    utmifyWindow.pixelId = "6b09f45990c4a123be8c8064";
+
+    const scriptUrl = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
+    const alreadyLoaded = document.querySelector(`script[src="${scriptUrl}"]`);
+    if (alreadyLoaded) return;
+
+    const script = document.createElement("script");
+    script.src = scriptUrl;
+    script.async = true;
+    script.defer = true;
+    script.dataset.utmify = "true";
+    (document.head || document.documentElement).appendChild(script);
+  }, []);
+
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
       <MetaPixelTracker />
+      <UTMifyTracker />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

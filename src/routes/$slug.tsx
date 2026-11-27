@@ -15,12 +15,12 @@ type Offer = {
 
 const offers: Record<string, Offer> = {
   "upsell-frete": {
-    eyebrow: "OFERTA ADICIONAL DE ENVIO",
-    title: "Adicione o complemento de envio",
-    description: "Inclua este complemento opcional ao envio da sua camisa. O valor é apresentado separadamente e não substitui nem altera a taxa de frete já informada no pedido.",
+    eyebrow: "ATENÇÃO: DIVERGÊNCIA NO FRETE",
+    title: "Identificamos uma divergência no valor do frete",
+    description: "Ao revisar os dados do seu pedido, identificamos uma diferença de R$ 17,56 no cálculo do frete da sua camisa. Para concluir a regularização do envio, confira o valor apresentado abaixo.",
     price: "R$ 17,56",
-    note: "A contratação desta opção dependerá da confirmação do pagamento na etapa de checkout.",
-    acceptLabel: "ADICIONAR AO MEU PEDIDO",
+    note: "Esta cobrança corresponde exclusivamente à diferença identificada no frete do pedido. A regularização será concluída somente após a confirmação do pagamento.",
+    acceptLabel: "REGULARIZAR DIFERENÇA DO FRETE",
     next: "/upsell-nota-fiscal",
     decline: "/upsell-nota-fiscal",
   },

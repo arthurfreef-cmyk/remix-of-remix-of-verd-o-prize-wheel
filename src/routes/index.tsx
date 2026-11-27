@@ -4,7 +4,7 @@ import { Header } from "@/components/funnel/Header";
 import { HomeScreen } from "@/components/funnel/HomeScreen";
 let quizScreenPromise: Promise<typeof import("@/components/funnel/QuizScreen")> | undefined;
 const loadQuizScreen = () => (quizScreenPromise ??= import("@/components/funnel/QuizScreen"));
-const QuizScreen = lazy(loadQuizScreen);
+const QuizScreen = lazy(() => loadQuizScreen().then((m) => ({ default: m.QuizScreen })));
 import { AnalysisScreen } from "@/components/funnel/AnalysisScreen";
 import { WheelScreen } from "@/components/funnel/WheelScreen";
 import { ResultScreen } from "@/components/funnel/ResultScreen";

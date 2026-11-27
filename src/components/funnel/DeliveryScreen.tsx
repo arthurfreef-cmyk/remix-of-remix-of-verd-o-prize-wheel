@@ -9,7 +9,7 @@ export function DeliveryScreen({ prize }: { prize: Prize }) {
   const [size, setSize] = useState<string>("");
 
   const handlePayment = () => {
-    const checkoutUrl = import.meta.env.VITE_SHIPPING_CHECKOUT_URL as string | undefined;
+    const checkoutUrl = import.meta.env["VITE_SHIPPING_CHECKOUT_URL"] as string | undefined;
     if (!size) {
       window.alert("Selecione o tamanho da camiseta para continuar.");
       return;

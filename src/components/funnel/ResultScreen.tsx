@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import type { Prize } from "@/data/funnel";
 import { playWin } from "@/lib/sounds";
 
-export function ResultScreen({ prize, onClaim }: { prize: Prize; onClaim: () => void }) {
+export function ResultScreen({ prize, score, total, onClaim }: { prize: Prize; score: number; total: number; onClaim: () => void }) {
   useEffect(() => {
     playWin();
     const end = Date.now() + 2500;
@@ -22,6 +22,11 @@ export function ResultScreen({ prize, onClaim }: { prize: Prize; onClaim: () => 
   return (
     <div className="mx-auto max-w-md animate-pop-in space-y-5 px-6 py-8 text-center">
       <h1 className="text-4xl font-bold uppercase text-primary">Você ganhou!</h1>
+      <div className="rounded-2xl border border-primary/15 bg-primary/5 px-5 py-4">
+        <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Sua pontuação no quiz</p>
+        <p className="mt-1 text-4xl font-extrabold text-primary">{score} <span className="text-xl text-muted-foreground">/ {total}</span></p>
+        <p className="mt-1 text-sm font-medium text-foreground">{score === total ? "Perfeito! Você é um verdadeiro palestrino!" : score >= 3 ? "Mandou bem! Você conhece o Verdão!" : "Obrigado por participar do desafio!"}</p>
+      </div>
       <div className="mx-auto max-w-xs rounded-2xl bg-secondary p-4">
         {prize.image ? (
           <img src={prize.image} alt={prize.name} className="w-full rounded-xl object-cover" />

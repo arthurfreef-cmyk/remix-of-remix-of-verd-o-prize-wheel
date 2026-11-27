@@ -38,7 +38,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      {step !== "analysis" && <Header />}
       {step === "home" && <HomeScreen onStart={() => { setQuizScore(0); setStep("quiz"); }} />}
       {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("analysis"); }} />}
       {step === "analysis" && (

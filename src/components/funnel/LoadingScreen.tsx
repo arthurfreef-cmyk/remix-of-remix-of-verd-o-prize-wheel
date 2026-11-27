@@ -20,7 +20,7 @@ export function LoadingScreen({ onFinish }: { onFinish: () => void }) {
           aria-label="Carregando"
         />
         <p className="mt-9 max-w-sm text-xl font-extrabold leading-snug text-[#087a45]">
-          Estamos preparando a próxima etapa do seu resgate...
+          Estamos cadastrando seu endereço de envio
         </p>
       </section>
 

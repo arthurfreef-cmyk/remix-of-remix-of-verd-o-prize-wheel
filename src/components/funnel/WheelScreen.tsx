@@ -131,19 +131,42 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
                         stroke="#fff7df"
                         strokeWidth="2"
                       />
-                      <g transform={`rotate(${mid} ${tx} ${ty})`}>
-                        <text x={tx} y={ty - 13} textAnchor="middle" fontSize="23">{p.emoji}</text>
-                        <text
-                          x={tx}
-                          y={ty + 12}
-                          textAnchor="middle"
-                          fontSize="11"
-                          fontWeight="900"
-                          fill={p.isLoss || dark ? "#ffffff" : "#075b32"}
-                        >
-                          {p.label}
-                        </text>
-                      </g>
+                      {p.image ? (
+                        <>
+                          <image
+                            href={p.image}
+                            x={tx - 29}
+                            y={ty - 31}
+                            width="58"
+                            height="49"
+                            preserveAspectRatio="xMidYMid meet"
+                          />
+                          <text
+                            x={tx}
+                            y={ty + 30}
+                            textAnchor="middle"
+                            fontSize="10"
+                            fontWeight="900"
+                            fill={dark ? "#ffffff" : "#075b32"}
+                          >
+                            {p.label}
+                          </text>
+                        </>
+                      ) : (
+                        <g transform={`rotate(${mid} ${tx} ${ty})`}>
+                          <text x={tx} y={ty - 8} textAnchor="middle" fontSize="25">{p.emoji}</text>
+                          <text
+                            x={tx}
+                            y={ty + 17}
+                            textAnchor="middle"
+                            fontSize="11"
+                            fontWeight="900"
+                            fill="#ffffff"
+                          >
+                            {p.label}
+                          </text>
+                        </g>
+                      )}
                     </g>
                   );
                 })}

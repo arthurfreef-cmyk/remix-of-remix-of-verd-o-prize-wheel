@@ -60,25 +60,23 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
   };
 
   return (
-    <main className="relative isolate min-h-[calc(100svh-5rem)] overflow-hidden bg-gradient-to-b from-[#063d27] via-[#075b32] to-[#032b1c] px-4 pb-10 pt-7 text-center text-white">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 25%, #b7e4c7 0, transparent 42%), radial-gradient(circle at 10% 80%, #c9a24b 0, transparent 30%)" }} />
-
+    <main className="min-h-[calc(100svh-5rem)] bg-[#f5f7f5] px-4 pb-10 pt-6 text-center text-slate-900">
       <div className="mx-auto max-w-md">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-[#f6e4a9] shadow-lg">
+        <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-emerald-800">
           <span aria-hidden>★</span> Etapa desbloqueada <span aria-hidden>★</span>
         </div>
 
-        <h1 className="mt-5 text-3xl font-black uppercase leading-tight tracking-tight sm:text-4xl">
+        <h1 className="mt-4 text-2xl font-extrabold leading-tight text-emerald-950 sm:text-3xl">
           Você chegou à roleta!
         </h1>
-        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-white/85 sm:text-base">
+        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-slate-600 sm:text-base">
           Mandou bem no desafio, palmeirense! Você conquistou acesso à Roleta do Verdão. Agora é hora de girar e descobrir qual prêmio a sua participação vai revelar.
         </p>
 
         <div className="mx-auto mt-5 grid max-w-sm grid-cols-2 gap-3">
-          <div className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 shadow-lg backdrop-blur-sm">
-            <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/65">Sua pontuação</p>
-            <p className="mt-1 text-2xl font-black text-[#f6e4a9]">{score}<span className="text-sm text-white/65">/5</span></p>
+          <div className="rounded-xl border border-slate-200 bg-white px-3 py-3">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Sua pontuação</p>
+            <p className="mt-1 text-2xl font-extrabold text-emerald-800">{score}<span className="text-sm text-slate-500">/5</span></p>
           </div>
           <div className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 shadow-lg backdrop-blur-sm">
             <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/65">Tentativas</p>
@@ -86,15 +84,15 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           </div>
         </div>
 
-        <div className="mx-auto mt-5 rounded-2xl border border-[#e4c978]/30 bg-black/15 px-4 py-3 text-left shadow-lg">
-          <p className="text-sm font-extrabold text-[#f6e4a9]">Sua missão agora é simples:</p>
-          <p className="mt-1 text-sm leading-relaxed text-white/85">
+        <div className="mx-auto mt-4 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left">
+          <p className="text-sm font-bold text-emerald-900">Sua missão agora é simples:</p>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600">
             Toque em <strong className="text-white">GIRAR A ROLETA</strong>, acompanhe o giro até parar e confira o resultado. Se aparecer “Tente novamente”, você poderá fazer outra tentativa.
           </p>
         </div>
 
         <div className="relative mx-auto mt-7 w-full max-w-[340px]">
-          <div className="absolute -inset-3 rounded-full bg-[#d4b45f]/20 blur-xl" />
+          <div className="absolute -inset-2 rounded-full bg-emerald-900/5 blur-lg" />
           <div className="absolute left-1/2 top-[-17px] z-20 -translate-x-1/2 drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)]">
             <svg width="42" height="52" viewBox="0 0 42 52" aria-hidden>
               <path d="M21 50 L3 7 Q21 -3 39 7 Z" fill="#f1d17b" stroke="#fff4d1" strokeWidth="2" />
@@ -102,7 +100,7 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
             </svg>
           </div>
 
-          <div className="relative rounded-full border-[10px] border-[#d6b65f] bg-[#f5e7bd] p-1 shadow-[0_18px_45px_rgba(0,0,0,0.45)]">
+          <div className="relative rounded-full border-[10px] border-[#d6b65f] bg-[#f5e7bd] p-1 shadow-[0_10px_24px_rgba(15,23,42,0.16)]">
             <div className="rounded-full border-4 border-[#fff7df]">
               <svg
                 viewBox={`0 0 ${R * 2} ${R * 2}`}
@@ -153,9 +151,9 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
 
         <div className="mx-auto mt-6 min-h-[58px] max-w-sm" aria-live="polite">
           {message ? (
-            <p className="rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white shadow-lg">{message}</p>
+            <p className="rounded-xl border border-emerald-200 bg-white px-4 py-3 text-sm font-semibold text-emerald-900">{message}</p>
           ) : (
-            <p className="text-sm font-semibold text-white/80">A roleta está pronta. Boa sorte e avanti, Verdão! 💚</p>
+            <p className="text-sm font-medium text-slate-600">A roleta está pronta. Boa sorte e avanti, Verdão! 💚</p>
           )}
         </div>
 
@@ -164,21 +162,21 @@ export function WheelScreen({ onWin, score }: { onWin: (prize: Prize) => void; s
           disabled={spinning || won}
           size="lg"
           className={cn(
-            "mt-2 h-14 w-full rounded-xl border-2 border-[#f7e6ad] bg-gradient-to-r from-[#f3d47d] to-[#c99d3b] text-lg font-black uppercase tracking-wider text-[#153b27] shadow-[0_8px_0_#87651f,0_14px_25px_rgba(0,0,0,0.3)] transition-all hover:brightness-105 active:translate-y-1 active:shadow-[0_4px_0_#87651f] disabled:opacity-60",
+            "mt-2 h-14 w-full rounded-xl bg-[#087a45] text-base font-bold uppercase tracking-wide text-white shadow-sm transition-colors hover:bg-[#06683a] disabled:opacity-60",
             !spinning && !won && "animate-pulse"
           )}
         >
           {spinning ? "Boa sorte! Girando..." : won ? "Resultado confirmado" : "GIRAR A ROLETA"}
         </Button>
 
-        <div className="mt-6 rounded-2xl border border-white/10 bg-black/15 px-4 py-4 text-left">
-          <p className="text-sm font-extrabold text-white">O que pode aparecer?</p>
-          <p className="mt-1 text-xs leading-relaxed text-white/75">
+        <div className="mt-5 rounded-xl border border-slate-200 bg-white px-4 py-4 text-left">
+          <p className="text-sm font-bold text-emerald-900">O que pode aparecer?</p>
+          <p className="mt-1 text-xs leading-relaxed text-slate-600">
             Camisas do Palmeiras e outros itens exibidos nos setores da roleta. O resultado será mostrado assim que o giro terminar.
           </p>
         </div>
 
-        <p className="mt-5 text-xs leading-relaxed text-white/55">
+        <p className="mt-5 text-xs leading-relaxed text-slate-500">
           Confira o resultado na tela seguinte e siga as instruções apresentadas para consultar as condições de participação e resgate.
         </p>
       </div>

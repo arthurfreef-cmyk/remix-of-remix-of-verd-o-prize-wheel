@@ -7,6 +7,7 @@ import { WheelScreen } from "@/components/funnel/WheelScreen";
 import { ResultScreen } from "@/components/funnel/ResultScreen";
 import { ClaimScreen } from "@/components/funnel/ClaimScreen";
 import type { Prize } from "@/data/funnel";
+import { questions } from "@/data/funnel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ type Step = "home" | "quiz" | "wheel" | "result" | "claim" | "done";
 function Index() {
   const [step, setStep] = useState<Step>("home");
   const [prize, setPrize] = useState<Prize | null>(null);
+  const [quizScore, setQuizScore] = useState(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -35,10 +37,10 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      {step === "home" && <HomeScreen onStart={() => setStep("quiz")} />}
-      {step === "quiz" && <QuizScreen onComplete={() => setStep("wheel")} />}
+      {step === "home" && <HomeScreen onStart={() => { setQuizScore(0); setStep("quiz"); }} />}
+      {step === "quiz" && <QuizScreen onComplete={(score) => { setQuizScore(score); setStep("wheel"); }} />}
       {step === "wheel" && <WheelScreen onWin={(p) => { setPrize(p); setStep("result"); }} />}
-      {step === "result" && prize && <ResultScreen prize={prize} onClaim={() => setStep("claim")} />}
+      {step === "result" && prize && <ResultScreen prize={prize} score={quizScore} total={questions.length} onClaim={() => setStep("claim")} />}
       {step === "claim" && prize && <ClaimScreen prize={prize} onDone={() => setStep("done")} />}
       {step === "done" && (
         <div className="mx-auto max-w-md animate-pop-in space-y-4 px-6 py-16 text-center">

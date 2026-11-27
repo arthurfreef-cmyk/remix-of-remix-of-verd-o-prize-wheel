@@ -6,6 +6,7 @@ import camisaPumaI2627 from "@/assets/camisa-puma-i-26-27.png";
 export interface Question {
   question: string;
   options: string[];
+  correctIndex: number;
 }
 
 export interface Prize {
@@ -18,11 +19,11 @@ export interface Prize {
 }
 
 export const questions: Question[] = [
-  { question: "Em que ano o Palmeiras foi fundado?", options: ["1910", "1912", "1914", "1917"] },
-  { question: "Qual é o apelido mais famoso do Palmeiras?", options: ["Alviverde", "Verdão", "Porco", "Palestra"] },
-  { question: "Quantas vezes o Palmeiras venceu a Libertadores?", options: ["1 vez", "2 vezes", "3 vezes", "4 vezes"] },
-  { question: "Qual é o estádio do Palmeiras?", options: ["Morumbi", "Pacaembu", "Allianz Parque", "Neo Química Arena"] },
-  { question: "Qual o nome original do Palmeiras?", options: ["Palestra Itália", "Sport Club Italiano", "Verde Paulista", "Clube Alviverde"] },
+  { question: "Em que ano o Palmeiras foi fundado?", options: ["1910", "1912", "1914", "1917"], correctIndex: 2 },
+  { question: "Qual é o apelido mais famoso do Palmeiras?", options: ["Alviverde", "Verdão", "Porco", "Palestra"], correctIndex: 1 },
+  { question: "Quantas vezes o Palmeiras venceu a Libertadores?", options: ["1 vez", "2 vezes", "3 vezes", "4 vezes"], correctIndex: 2 },
+  { question: "Qual é o estádio do Palmeiras?", options: ["Morumbi", "Pacaembu", "Allianz Parque", "Neo Química Arena"], correctIndex: 2 },
+  { question: "Qual o nome original do Palmeiras?", options: ["Palestra Itália", "Sport Club Italiano", "Verde Paulista", "Clube Alviverde"], correctIndex: 0 },
 ];
 
 /** Wheel segments in clockwise order, starting at the top. */
